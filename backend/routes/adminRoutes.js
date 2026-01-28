@@ -1,21 +1,16 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
+const authMiddleware = require('../middlewares/authMiddleware');
+const providerController = require('../controllers/admin/providerController');
 
-const authMiddleware = require("../middlewares/authMiddleware");
-const roleMiddleware = require("../middlewares/roleMiddleware");
+// All routes protected
+router.use(authMiddleware);
 
-const {
-  createProvider,
-  getProviders,
-  updateProvider,
-  deleteProvider
-} = require("../controllers/admin/providerController");
-
-// 🔐 Admin-only
-router.use(authMiddleware, roleMiddleware("admin"));
-
-router.post("/providers", createProvider);
-router.get("/providers", getProviders);
-router.put("/providers/:id", updateProvider);
-router.delete("/providers/:id", deleteProvider);
+// CRUD for providers
+router.post('/providers', providerController.createProvider);
+router.get('/providers', providerController.getAllProviders);
+router.get('/providers/:id', providerController.getProvider);
+router.put('/providers/:id', providerController.updateProvider);
+router.delete('/providers/:id', providerController.deleteProvider);
 
 module.exports = router;
