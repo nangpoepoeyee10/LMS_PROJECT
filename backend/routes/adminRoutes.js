@@ -1,36 +1,49 @@
 const express = require("express");
 const router = express.Router();
-const authMiddleware = require("../middlewares/authMiddleware");
+const { protect, admin } = require("../middlewares/authMiddleware");
+
 const providerController = require("../controllers/admin/providerController");
 const adminController = require("../controllers/admin/adminController");
 const categoryController = require("../controllers/admin/categoryController");
 const courseController = require("../controllers/admin/courseController");
+const userController = require("../controllers/admin/userController");
 
-// All routes protected
-router.use(authMiddleware);
+// PROVIDER CRUD
+router.post("/providers", protect, admin, providerController.createProvider);
+router.get("/providers", protect, admin, providerController.getAllProviders);
+router.put("/providers/:id", protect, admin, providerController.updateProvider);
+router.delete("/providers/:id", protect, admin, providerController.deleteProvider);
 
-// Providrer CRUD
-router.post("/providers", providerController.createProvider);
-router.get("/providers", providerController.getAllProviders);
-router.put("/providers/:id", providerController.updateProvider);
-router.delete("/providers/:id", providerController.deleteProvider);
+// ADMIN CRUD
+router.post("/admins", protect, admin, adminController.createAdmin);
+router.get("/admins", protect, admin, adminController.getAllAdmins);
+router.put("/admins/:id", protect, admin, adminController.updateAdmin);
+router.delete("/admins/:id", protect, admin, adminController.deleteAdmin);
 
-// Admin CRUD
-router.post("/admins", adminController.createAdmin);
-router.get("/admins", adminController.getAllAdmins);
-router.put("/admins/:id", adminController.updateAdmin);
-router.delete("/admins/:id", adminController.deleteAdmin);
+// CATEGORY CRUD
+router.post("/categories", protect, admin, categoryController.createCategory);
+router.get("/categories", protect, admin, categoryController.getAllCategories);
+router.put("/categories/:id", protect, admin, categoryController.updateCategory);
+router.delete("/categories/:id", protect, admin, categoryController.deleteCategory);
 
-// Category CRUD
-router.post("/categories", categoryController.createCategory);
-router.get("/categories", categoryController.getAllCategories);
-router.put("/categories/:id", categoryController.updateCategory);
-router.delete("/categories/:id", categoryController.deleteCategory);
+// COURSE CRUD
+router.post("/courses", protect, admin, courseController.createCourse);
+router.get("/courses", protect, admin, courseController.getAllCourses);
+router.put("/courses/:id", protect, admin, courseController.updateCourse);
+router.delete("/courses/:id", protect, admin, courseController.deleteCourse);
 
-// Course CRUD
-router.post("/courses", courseController.createCourse);
-router.get("/courses", courseController.getAllCourses);
-router.put("/courses/:id", courseController.updateCourse);
-router.delete("/courses/:id", courseController.deleteCourse);
+// User CRUD
+router.post("/users", userController.createUser);
+router.get("/users", userController.getAllUsers);
+router.get("/users/:id", userController.getUser);
+router.put("/users/:id", userController.updateUser);
+router.delete("/users/:id", userController.deleteUser);
+
+// User CRUD
+router.post("/users", userController.createUser);
+router.get("/users", userController.getAllUsers);
+router.put("/users/:id", userController.updateUser);
+router.delete("/users/:id", userController.deleteUser);
 
 module.exports = router;
+
