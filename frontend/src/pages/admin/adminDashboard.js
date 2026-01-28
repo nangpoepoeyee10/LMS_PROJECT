@@ -7,7 +7,8 @@ export default function AdminDashboard() {
     <Container>
       <Typography variant="h4">Admin Dashboard</Typography>
       <Typography>
-        Manage Users, Providers, Courses, Categories, Apps, Sliders, Homepage Blocks
+        Manage Users, Providers, Courses, Categories, Apps, Sliders, Homepage
+        Blocks
       </Typography>
     </Container>
   );

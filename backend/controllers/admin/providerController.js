@@ -44,21 +44,7 @@ exports.getAllProviders = async (req, res) => {
   }
 };
 
-// GET SINGLE PROVIDER
-exports.getProvider = async (req, res) => {
-  try {
-    const provider = await User.findById(req.params.id).select("-password");
-    if (!provider || provider.role !== "provider")
-      return res.status(404).json({ message: "Provider not found" });
-
-    res.json(provider);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error" });
-  }
-};
-
-// UPDATE PROVIDER 
+// UPDATE PROVIDER
 exports.updateProvider = async (req, res) => {
   try {
     const { name, email, password } = req.body || {};
