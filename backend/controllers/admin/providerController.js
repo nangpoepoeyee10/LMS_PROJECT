@@ -48,7 +48,7 @@ exports.getProviders = async (req, res) => {
   }
 };
 
-// ✅ Update Provider
+//  Update Provider
 exports.updateProvider = async (req, res) => {
   try {
     const { id } = req.params;
