@@ -8,6 +8,7 @@ const categoryController = require("../controllers/admin/categoryController");
 const courseController = require("../controllers/admin/courseController");
 const userController = require("../controllers/admin/userController");
 const appController = require("../controllers/admin/appController");
+const sliderController = require("../controllers/admin/sliderController");
 
 // PROVIDER CRUD
 router.post("/providers", protect, admin, providerController.createProvider);
@@ -34,21 +35,28 @@ router.put("/courses/:id", protect, admin, courseController.updateCourse);
 router.delete("/courses/:id", protect, admin, courseController.deleteCourse);
 
 // User CRUD
-router.post("/users", userController.createUser);
-router.get("/users", userController.getAllUsers);
-router.put("/users/:id", userController.updateUser);
-router.delete("/users/:id", userController.deleteUser);
+router.post("/users", protect, admin, userController.createUser);
+router.get("/users", protect, admin, userController.getAllUsers);
+router.put("/users/:id", protect, admin, userController.updateUser);
+router.delete("/users/:id", protect, admin, userController.deleteUser);
 
 // User progress
-router.get("/users/:id/progress", userController.getUserProgress);
+router.get("/users/:id/progress", protect, admin, userController.getUserProgress);
 
 // App CRUD
-router.post("/apps", appController.createApp);
-router.get("/apps", appController.getAllApps);
-router.put("/apps/:id", appController.updateApp);
-router.delete("/apps/:id", appController.deleteApp);
+router.post("/apps", protect, admin, appController.createApp);
+router.get("/apps", protect, admin, appController.getAllApps);
+router.put("/apps/:id", protect, admin, appController.updateApp);
+router.delete("/apps/:id", protect, admin, appController.deleteApp);
 
 // Add comment
-router.post("/apps/:id/comments", appController.addComment);
+router.post("/apps/:id/comments", protect, admin, appController.addComment);
+
+// Slider CRUD
+router.post("/sliders", protect, admin, sliderController.createSlider);
+router.get("/sliders", protect, admin, sliderController.getAllSliders);
+router.put("/sliders/:id", protect, admin, sliderController.updateSlider);
+router.delete("/sliders/:id", protect, admin, sliderController.deleteSlider);
+
 module.exports = router;
 
