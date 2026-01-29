@@ -7,6 +7,7 @@ const adminController = require("../controllers/admin/adminController");
 const categoryController = require("../controllers/admin/categoryController");
 const courseController = require("../controllers/admin/courseController");
 const userController = require("../controllers/admin/userController");
+const appController = require("../controllers/admin/appController");
 
 // PROVIDER CRUD
 router.post("/providers", protect, admin, providerController.createProvider);
@@ -35,15 +36,19 @@ router.delete("/courses/:id", protect, admin, courseController.deleteCourse);
 // User CRUD
 router.post("/users", userController.createUser);
 router.get("/users", userController.getAllUsers);
-router.get("/users/:id", userController.getUser);
 router.put("/users/:id", userController.updateUser);
 router.delete("/users/:id", userController.deleteUser);
 
-// User CRUD
-router.post("/users", userController.createUser);
-router.get("/users", userController.getAllUsers);
-router.put("/users/:id", userController.updateUser);
-router.delete("/users/:id", userController.deleteUser);
+// User progress
+router.get("/users/:id/progress", userController.getUserProgress);
 
+// App CRUD
+router.post("/apps", appController.createApp);
+router.get("/apps", appController.getAllApps);
+router.put("/apps/:id", appController.updateApp);
+router.delete("/apps/:id", appController.deleteApp);
+
+// Add comment
+router.post("/apps/:id/comments", appController.addComment);
 module.exports = router;
 
